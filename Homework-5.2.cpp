@@ -1,31 +1,31 @@
 ﻿#include <iostream>
 
 template<class T>
-class Table {
+class table {
 private:
     T rows;
     T cols;
     T** data;
 public:
-    Table(T r, T c) : rows(r), cols(c) {
+    table(T r, T c) : rows(r), cols(c) {
         data = new T * [rows];
         for (int i = 0; i < rows; i++) {
             data[i] = new T[cols];
         }
     }
 
-    ~Table() {
+    ~table() {
         for (int i = 0; i < rows; i++) {
             delete[] data[i];
         }
         delete[] data;
     }
 
-    T* operator [](index) {
+    T* operator [](T index) {
         return data[index];
     }
 
-    const T* operator [](index) const {
+    const T* operator [](T index) const {
         return data[index];
     }
 
@@ -36,5 +36,9 @@ public:
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    auto test = table<int>(2, 3);
+    test[0][0] = 4;
+    std::cout << test[0][0] << std::endl;
+    std::cout << "Size of the table: " << test.Size() << std::endl;
+    return 0;
 }
